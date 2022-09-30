@@ -1424,11 +1424,17 @@ class MessageInputState extends State<MessageInput> {
       case 'video':
         return Stack(
           children: [
-            StreamVideoThumbnailImage(
-              height: 104,
-              width: 104,
-              video: (attachment.file?.path ?? attachment.assetUrl)!,
-              fit: BoxFit.cover,
+            attachment.uploadState.maybeWhen(
+              orElse: () => Image.asset(
+                'images/placeholder.png',
+                package: 'stream_chat_flutter',
+              ),
+              success: () => StreamVideoThumbnailImage(
+                height: 104,
+                width: 104,
+                video: (attachment.file?.path ?? attachment.assetUrl)!,
+                fit: BoxFit.cover,
+              ),
             ),
             Positioned(
               left: 8,

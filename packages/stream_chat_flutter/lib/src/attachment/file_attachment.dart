@@ -160,17 +160,22 @@ class StreamFileAttachment extends StreamAttachmentWidget {
         type: MaterialType.transparency,
         shape: _getDefaultShape(context),
         child: source.when(
-          local: () => StreamVideoThumbnailImage(
-            fit: BoxFit.cover,
-            video: attachment.file!.path!,
-            placeholderBuilder: (_) => const Center(
-              child: SizedBox(
-                width: 20,
-                height: 20,
-                child: CircularProgressIndicator(),
+          local: () {
+            if (attachment.file?.bytes == null) {
+              return StreamSvgIcon.camera();
+            }
+            return StreamVideoThumbnailImage(
+              fit: BoxFit.cover,
+              video: attachment.file!.path!,
+              placeholderBuilder: (_) => const Center(
+                child: SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(),
+                ),
               ),
-            ),
-          ),
+            );
+          },
           network: () => StreamVideoThumbnailImage(
             fit: BoxFit.cover,
             video: attachment.assetUrl!,
