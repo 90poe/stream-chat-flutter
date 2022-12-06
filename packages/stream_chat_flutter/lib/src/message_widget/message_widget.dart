@@ -306,7 +306,7 @@ class StreamMessageWidget extends StatefulWidget {
   /// {@template bottomRowBuilder}
   /// Widget builder for building a bottom row below the message
   /// {@endtemplate}
-  final Widget Function(BuildContext, Message)? bottomRowBuilder;
+  final Widget Function(BuildContext, Message, Widget)? bottomRowBuilder;
 
   /// {@template deletedBottomRowBuilder}
   /// Widget builder for building a bottom row below a deleted message
@@ -538,7 +538,7 @@ class StreamMessageWidget extends StatefulWidget {
     Widget Function(BuildContext, Message)? editMessageInputBuilder,
     Widget Function(BuildContext, Message)? textBuilder,
     Widget Function(BuildContext, Message)? usernameBuilder,
-    Widget Function(BuildContext, Message)? bottomRowBuilder,
+    Widget Function(BuildContext, Message, Widget)? bottomRowBuilder,
     Widget Function(BuildContext, Message)? deletedBottomRowBuilder,
     void Function(BuildContext, Message)? onMessageActions,
     Message? message,
